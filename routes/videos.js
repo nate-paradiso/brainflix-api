@@ -2,12 +2,24 @@ const express = require("express");
 const router = express.Router();
 const fs = require("fs")
 
+const image = app.use(express.static("./public"));
 
 router.get("/", (req, res)=> {
     const videosFile =fs.readFileSync("./data/videos.json");
     const parsedVideos = JSON.parse(videosFile);
 
-    res.json(parsedVideos);
+
+    const videoInfo = parsedVideos.map((video) =>({
+
+        id: video.id,
+        title: video.title,
+        channel: video.channel,
+        image: image
+        
+
+    }));
+
+    res.json(videoInfo);
 
 })
 
