@@ -8,6 +8,8 @@ app.use(express.json());
 // Allow cross origin for a particular origin (our frontend), but block requests from any other origin
 app.use(cors({ origin: "http://localhost:3000" }));
 
+require("dotenv").config();
+const PORT = process.env.PORT;
 
 
 
