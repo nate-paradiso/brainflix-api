@@ -4,7 +4,7 @@ const cors = require("cors");
 // Allow JSON to be sent/recieved 
 app.use(express.json());
 // Allow the `public` directory to serve static files
-app.use("/public", express.static("./public"));
+// app.use("/public", express.static("./public"));
 // Allow cross origin for a particular origin (our frontend), but block requests from any other origin
 app.use(cors({ origin: "http://localhost:3000" }));
 
