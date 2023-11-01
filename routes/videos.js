@@ -14,9 +14,11 @@ router.get("/", (req, res)=> {
         id: video.id,
         title: video.title,
         channel: video.channel,
-        description: video.description,
-        image: "Health.jpeg"
+        image: video.image,
+        description: video.description
     }));
+
+    //send the response(data)
     res.json(videoInfo);
 })
 
@@ -35,7 +37,7 @@ router.get("/:videoId", (req, res)=> {
 router.post("/",(req, res) => {
     const title = req.body.title;
     const description = req.body.description;
-    const image = req.body.image;
+    // const image = req.body.image;
 
     if(!title || !description) {
         return res.status(400).json ({error: true, message: "You must provide a title and description"})
@@ -44,7 +46,8 @@ router.post("/",(req, res) => {
         id: uuid(),
         title: title,
         description: description,
-        image: "Health.jpeg"
+        channel: "New Video",
+        image: "/Travel.jpeg"
     };
 
     const posts = fs.readFileSync("./data/videos.json");
