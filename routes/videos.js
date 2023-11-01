@@ -2,9 +2,6 @@ const express = require("express");
 const router = express.Router();
 const fs = require("fs")
 const { v4: uuid } = require("uuid");
-const app = express();
-
-app.use(express.static("./public"));
 
 router.get("/", (req, res)=> {
     const videosFile =fs.readFileSync("./data/videos.json");
@@ -14,7 +11,7 @@ router.get("/", (req, res)=> {
         id: video.id,
         title: video.title,
         channel: video.channel,
-        image: video.image,
+        image: `http://localhost:8088/images/${video.image}`,
         description: video.description
     }));
 
@@ -30,6 +27,7 @@ router.get("/:videoId", (req, res)=> {
     if (!individualVideo) {
         res.status(404).send("Video not found");
       }    
+      individualVideo.image = `http://localhost:8088/images${individualVideo.image}`
     res.json(individualVideo);
 });
 
@@ -47,7 +45,7 @@ router.post("/",(req, res) => {
         title: title,
         description: description,
         channel: "New Video",
-        image: "/Travel.jpeg"
+        image: "/New-video.jpeg"
     };
 
     const posts = fs.readFileSync("./data/videos.json");
@@ -59,6 +57,5 @@ router.post("/",(req, res) => {
 
     res.status(201).json(newPost);
 });
-
 
 module.exports = router;
