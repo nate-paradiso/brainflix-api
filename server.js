@@ -3,8 +3,6 @@ const app = express();
 const cors = require("cors");
 
 
-
-
 app.use("/images", express.static('public/images'));
 
 // Allow JSON to be sent/received 
