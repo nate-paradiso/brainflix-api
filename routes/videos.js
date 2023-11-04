@@ -61,8 +61,8 @@ router.post("/",(req, res) => {
         },
         {
             id: uuid(),
-            name: "John",
-            comment:"deep dive!",
+            name: "Some Guy",
+            comment:"",
             likes:"80,985",
             timestamp: new Date,
         },]
@@ -81,28 +81,26 @@ router.post("/",(req, res) => {
 
 
 
-router.post("/:videoId/comments",(req, res) => {
-    const comment = req.body.comments; 
+router.post("/:videoId/comments", (req, res) => {
+    const commentText = req.body.comment;  
 
-    if(!comment) {
-        return res.status(400).json ({error: true, message: "You must provide a comment"})
+    if (!commentText) {
+        return res.status(400).json({ error: true, message: "You must provide a comment" });
     }
+
     const newComment = {
-       
-            id: uuid(),
-            name: "Nate",
-            comment: comment,
-            likes:"75,985",
-            timestamp: new Date,
-        
+        id: uuid(),
+        name: "Nate",
+        comment: commentText,  
+        likes: "75,985",
+        timestamp: new Date(),
     };
 
     const postsComments = fs.readFileSync("./data/videos.json");
     const parsedComments = JSON.parse(postsComments);
 
-
-     const videoIndex = parsedComments.findIndex((video) => video.id === req.params.videoId);
-     if (videoIndex === -1) {
+    const videoIndex = parsedComments.findIndex((video) => video.id === req.params.videoId);
+    if (videoIndex === -1) {
         return res.status(404).json({ error: true, message: "Video not found" });
     }
 
