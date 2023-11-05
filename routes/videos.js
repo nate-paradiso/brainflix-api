@@ -13,7 +13,7 @@ router.get("/", (req, res)=> {
         channel: video.channel,
         image: `http://localhost:8088/images/${video.image}`,
         description: video.description,
-        // video: `http://localhost:8088/images/${video.video}`
+        video: `http://localhost:8088/images/${video.video}`
     }));
 
     //send the response(data)
@@ -29,7 +29,7 @@ router.get("/:videoId", (req, res)=> {
         res.status(404).send("Video not found");
       }    
       individualVideo.image = `http://localhost:8088/images${individualVideo.image}`
-    //   individualVideo.video = `http://localhost:8088/images${individualVideo.image}`
+      individualVideo.video = `http://localhost:8088/images${individualVideo.video}`
     res.json(individualVideo);
 });
 
