@@ -13,7 +13,6 @@ const PORT = process.env.PORT || 8088;
 const FRONTEND_URL = process.env.FRONTEND_URL;
 app.use(cors({ origin: FRONTEND_URL }));
 
-
 const videoRoutes = require("./routes/videos");
 app.use("/videos", videoRoutes);
 
